@@ -1,22 +1,28 @@
-.App {
-  max-width: 960px;
-  margin: 0 auto;
-}
 nav {
   display: flex;
-  margin: 0 auto 60px;
-  gap: 10px;
+  gap: 1rem;
+  padding: 1rem;
+  background: #eee;
   align-items: center;
 }
+
 nav h1 {
   margin-right: auto;
 }
+
 nav a {
-  color: #333;
-  padding: 4px 10px;
-}
-nav a.active {
-  color: white;
-  background: #333;
   text-decoration: none;
+  color: #333;
+}
+
+nav a.active {
+  font-weight: bold;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
 }

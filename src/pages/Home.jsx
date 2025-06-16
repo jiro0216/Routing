@@ -1,21 +1,26 @@
-import { Link } from 'react-router-dom'
-import { useFetch } from '../hooks/useFetch'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Home.css'; // Import the CSS
 
-// styles
-import './Home.css'
+export default function Home() {
+  const [username, setUsername] = useState(null);
+  const navigate = useNavigate();
 
-export default function Home({articles}) {
+  useEffect(() => {
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (storedUser) {
+      setUsername(storedUser);
+    } else {
+      navigate('/');
+    }
+  }, [navigate]);
+
+  if (!username) return null;
 
   return (
-    <div className="home">
-      <h2>Articles</h2>      
-      {articles && articles.map(article => (
-        <div key={article.id} className="card">
-          <h3>{article.title}</h3>
-          <p>Written by {article.author}</p>
-          <Link to={`/articles/${article.id}`}>Read More...</Link>
-        </div>
-      ))}
+    <div className="home-container">
+      <h2>Welcome, {username}!</h2>
+      <p>You have successfully logged in.</p>
     </div>
-  )
+  );
 }

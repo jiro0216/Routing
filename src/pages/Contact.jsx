@@ -1,16 +1,51 @@
-import { useLocation } from "react-router-dom"
+import React, { useState } from 'react';
+import './Contact.css'; // Import the CSS
 
 export default function Contact() {
-  const queryString = useLocation().search
-  console.log(queryString)
-  
-  const queryParams = new URLSearchParams(queryString)
-  const name = queryParams.get("name")
-  
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Thanks for contacting us, ${form.name}!`);
+    setForm({ name: '', email: '', message: '' });
+  };
+
   return (
-    <div>
-      <h2>Hey {name}, Contact Us</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam explicabo laudantium nemo voluptas cum omnis error voluptate. Nihil numquam ipsum necessitatibus hic odit neque consequuntur dolor. Magni quos ratione iste.</p>
+    <div className="contact">
+      <h2>Contact Us</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Message:</label>
+        <textarea
+          name="message"
+          value={form.message}
+          onChange={handleChange}
+          required
+        ></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
     </div>
-  )
+  );
 }
