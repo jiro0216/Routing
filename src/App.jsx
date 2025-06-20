@@ -1,24 +1,29 @@
-import './App.css'
-import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom'
-import React, { useState } from 'react'
+import "./App.css";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  NavLink,
+  Navigate,
+} from "react-router-dom";
+import React, { useState } from "react";
 
 // page components
-import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import Login from './pages/Login'
-
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Login from "./pages/Login";
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   const handleLogin = (loggedInUser) => {
-    setUser(loggedInUser)
-  }
+    setUser(loggedInUser);
+  };
 
   const handleLogout = () => {
-    setUser(null)
-  }
+    setUser(null);
+  };
 
   return (
     <div className="App">
@@ -31,12 +36,17 @@ function App() {
           {!user ? (
             <NavLink to="/login">Login</NavLink>
           ) : (
-            <button onClick={handleLogout} style={{ marginLeft: '1rem' }}>Logout</button>
+            <button onClick={handleLogout} style={{ marginLeft: "1rem" }}>
+              Logout
+            </button>
           )}
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home user={user} onLogout={handleLogout} />} />
+          <Route
+            path="/"
+            element={<Home user={user} onLogout={handleLogout} />}
+          />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
@@ -44,7 +54,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
